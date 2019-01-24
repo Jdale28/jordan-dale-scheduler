@@ -2,21 +2,75 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 
+const Body = styled.div`
+  @import url("https://fonts.googleapis.com/css?family=PT+Sans|Raleway");
+  * {
+    text-align: center;
+  }
+  .headline {
+    font-size: 4rem;
+    font-family: "PT Sans";
+  }
+  .tagline {
+    font-size: 1.25rem;
+    font-family: "Raleway";
+  }
+  .poll-container {
+    margin-top: 5vh;
+    .poll-button {
+      border: 1px solid black;
+      opacity: 0.5;
+      border-radius: 25px;
+      font-size: 1.25rem;
+      padding: 10px;
+      margin: 2vh 1vw 0vh 1vw;
+      &:hover {
+        opacity: 1;
+      }
+    }
+    #love {
+        &:hover {
+            background-color: hotpink;
+        }
+    }
+    #hate {
+        &:hover {
+            background-color: black;
+            color: yellow;
+        }
+    }
+  }
+  .poll-headline,
+  .time-table-tagline {
+    font-family: "PT Sans";
+  }
+`;
+
 const TimeTable = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   width: 50%;
-  border: 1px solid black;
-  margin: 10vh 25vw 0vh 25vw;
+  margin: 5vh 25vw 0vh 25vw;
   .timeslot {
     border: 1px solid black;
-    width: 30vw;
+    width: 25vw;
     text-align: center;
+    border-radius: 25px;
+    font-size: 1.5rem;
+    font-family: "Raleway";
+    &:hover {
+      background-color: blue;
+      color: white;
+    }
   }
   .booked {
     background-color: red;
+    &:hover {
+      background-color: red;
+      color: yellow;
+    }
   }
 `;
 
@@ -80,10 +134,10 @@ class Schedule extends Component {
     let value = e.target.innerHTML;
     let activeUser = { ...this.state.newUser };
     // IF the time has not been booked, update the timeslot in newUser's information
-    if (this.state.availableTimes[i].isTimeBooked === false) { 
+    if (this.state.availableTimes[i].isTimeBooked === false) {
       activeUser["timeslot"] = value;
       this.setState({ timeslot: value, newUser: activeUser });
-    } 
+    }
     // ELSE, because time has been booked, populated the booked user's information in the modal input fields
     else {
       let bookedUser = this.state.users.filter(user => {
@@ -137,12 +191,12 @@ class Schedule extends Component {
   };
 
   loveModals = () => {
-    this.props.dispatch({ type: "LOVE" })
-  }
+    this.props.dispatch({ type: "LOVE" });
+  };
 
   hateModals = () => {
-    this.props.dispatch({ type: "HATE" })
-  }
+    this.props.dispatch({ type: "HATE" });
+  };
 
   render() {
     const returnTimes = this.state.availableTimes.map((timeslot, i) => {
@@ -162,13 +216,26 @@ class Schedule extends Component {
       );
     });
     return (
-      <div>
+      <Body>
+        <h1 className="headline"> Welcome to Our Offices</h1>
+        <h4 className="tagline">
+          Please utilize our interactive scheduling software to book an
+          appointment
+        </h4>
+        <h4 className="tagline">
+          Please note that booked appointments are in highlighted in red
+        </h4>
+        <h4 className="tagline">
+          We apologize... we are very forgetful, if you leave this page, your
+          bookings will refresh
+        </h4>
+
         <TimeTable>
+          <h1 className="time-table-tagline">Please Select a Time Below</h1>
           <div>{returnTimes}</div>
         </TimeTable>
 
-        {/* Modal Code for React-strap */}
-
+        {/* Modal Code */}
         <div
           className="modal fade"
           id="modalCenter"
@@ -226,19 +293,23 @@ class Schedule extends Component {
             </div>
           </div>
         </div>
-        {/* End Modal Code from React-strap */}
+        {/* End Modal Code */}
 
         {/* Start of Poll Code */}
-        <div>
-            <h1>Poll:</h1>
-            <h2>Love or Hate Modals?</h2>
-            <div>
-                <button onClick={this.hateModals}>Hate</button>
-                <span className="count">{this.props.count}</span>
-                <button onClick={this.loveModals}>Love</button>
-            </div>
+        <div className="poll-container">
+          <h1 className="poll-headline">Poll:</h1>
+          <h2 className="tagline">Love or Hate Modals?</h2>
+          <div>
+            <button className="poll-button" id="hate" onClick={this.hateModals}>
+              Hate
+            </button>
+            <span className="count">{this.props.count}</span>
+            <button className="poll-button" id="love" onClick={this.loveModals}>
+              Love
+            </button>
+          </div>
         </div>
-      </div>
+      </Body>
     );
   }
 }
