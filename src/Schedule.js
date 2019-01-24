@@ -43,12 +43,12 @@ class Schedule extends Component {
   };
 
   activateModal = e => {
-      if (e.target.style.backgroundColor !== "red"){
-          e.target.style.backgroundColor = "red";
-          let value = e.target.innerHTML;
-          this.setState({ timeslot: value });
-          this.setState({ timebooked: false})
-      }
+    if (e.target.style.backgroundColor !== "red") {
+      e.target.style.backgroundColor = "red";
+      let value = e.target.innerHTML;
+      this.setState({ timeslot: value });
+      this.setState({ timebooked: false });
+    }
   };
 
   handleInput = e => {
@@ -57,41 +57,43 @@ class Schedule extends Component {
     this.setState({ newUser: updatedNewUser });
   };
 
-//   clearInput = e => {
-//     let elements = document.querySelectorAll(".timeslot");
-//     for (var i = 0; i < elements.length; i++) {
-//       elements[i].style.backgroundColor = "white";
-//     }
-//     this.setState({ newUser: this.state.blankUser });
-//   };
+  //   clearInput = e => {
+  //     let elements = document.querySelectorAll(".timeslot");
+  //     for (var i = 0; i < elements.length; i++) {
+  //       elements[i].style.backgroundColor = "white";
+  //     }
+  //     this.setState({ newUser: this.state.blankUser });
+  //   };
 
   changeColor = () => {
     if (this.state.timebooked === true) {
-        console.log("let's change to red")
+      console.log("let's change to red");
     } else {
-        console.log("let's do nothing")
+      console.log("let's do nothing");
     }
-  }
+  };
   handleSubmit = e => {
     this.setState(prevState => ({
       timebooked: !prevState.timebooked
     }));
-    this.changeColor()
+    this.changeColor();
   };
 
   render() {
     const returnTimes = this.state.availableTimes.map((timeslot, i) => {
       return (
-        <div
-          key={i}
-          data-toggle="modal"
-          data-target="#exampleModalCenter"
-          onClick={this.activateModal}
-          className="timeslot"
-          id={i}
-        >
-          "{timeslot}"
-        </div>
+        
+          <div
+            key={i}
+            data-toggle="modal"
+            data-target="#exampleModalCenter"
+            onClick={this.activateModal}
+            className="timeslot"
+            id={i}
+          >
+            {timeslot}
+          </div>
+
       );
     });
     return (
@@ -167,6 +169,7 @@ class Schedule extends Component {
           </div>
         </div>
         {/* End Modal Code from React-strap */}
+        
       </div>
     );
   }
