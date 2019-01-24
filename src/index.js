@@ -5,57 +5,7 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 
 const initialState = {
-  count: 0,
-  timeslot: "",
-  users: [],
-  newUser: {
-    name: "",
-    number: "",
-    timeslot: ""
-  },
-  blankUser: {
-    name: "",
-    number: "",
-    timeslot: ""
-  },
-  availableTimes: [
-    {
-      time: "9 a.m.",
-      isTimeBooked: false
-    },
-    {
-      time: "10 a.m.",
-      isTimeBooked: false
-    },
-    {
-      time: "11 a.m.",
-      isTimeBooked: false
-    },
-    {
-      time: "12 a.m.",
-      isTimeBooked: false
-    },
-    {
-      time: "1 p.m.",
-      isTimeBooked: false
-    },
-    {
-      time: "2 p.m.",
-      isTimeBooked: false
-    },
-    {
-      time: "3 p.m.",
-      isTimeBooked: false
-    },
-    {
-      time: "4 p.m.",
-      isTimeBooked: false
-    },
-    {
-      time: "5 p.m.",
-      isTimeBooked: false
-    }
-  ]
+  count: 0
 };
 
 function reducer(state = initialState, action) {
