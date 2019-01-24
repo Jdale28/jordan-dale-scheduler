@@ -48,7 +48,7 @@ const Body = styled.div`
       border-radius: 25px;
       font-size: 1.25rem;
       padding: 10px;
-      margin: 2vh 1vw 0vh 1vw;
+      margin: .5vh 1vw 0vh 1vw;
       &:hover {
         opacity: 1;
       }
