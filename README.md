@@ -1,9 +1,11 @@
-React App created by Jordan Dale for Cox Automotives.
+## React App created by Jordan Dale for Cox Automotives.
 
+Hosted live at: https://jordandale-coxauto.herokuapp.com/
+
+
+## Technologies Used: 
 Redux utilized for counter feature for Modal Poll
-
 Styled-divs utilized for styling
-
 Node.js used for running application and npm commands below:
 
 
