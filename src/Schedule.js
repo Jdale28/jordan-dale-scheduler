@@ -7,6 +7,10 @@ const Body = styled.div`
   * {
     text-align: center;
   }
+  img {
+      width: 400px;
+      height: auto;
+  }
   .headline {
     margin-top: 3vh;
     font-size: 4rem;
@@ -65,7 +69,7 @@ const TimeTable = styled.div`
     font-size: 1.5rem;
     font-family: "Raleway";
     &:hover {
-      background-color: blue;
+      background-color: rgb(0, 82, 138);
       color: white;
     }
   }
@@ -221,6 +225,7 @@ class Schedule extends Component {
     });
     return (
       <Body>
+          <div><img src="https://i.imgur.com/2qWGonz.png" alt=""/></div>
         <h1 className="headline"> Welcome to Our Offices</h1>
         <h4 className="tagline">
           Please utilize our interactive scheduling software to book an
