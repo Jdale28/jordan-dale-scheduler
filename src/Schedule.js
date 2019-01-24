@@ -7,6 +7,12 @@ const Body = styled.div`
   * {
     text-align: center;
   }
+  input {
+      width: 25vw;
+      @media screen and (max-width: 800px) {
+      width: 50vw;
+    }
+  }
   img {
     margin-top: 2vh;
     width: 400px;
@@ -327,8 +333,8 @@ class Schedule extends Component {
                   onChange={this.handleInput}
                   value={this.state.newUser.number || ""}
                   name="number"
-                  type="tel"
-                  placeholder="Your Number"
+                  type="text"
+                  placeholder="Tel# Ex) XXX-XXX-XXXX"
                 />
               </div>
               <div className="modal-footer">
