@@ -141,7 +141,7 @@ class Schedule extends Component {
         isTimeBooked: false
       },
       {
-        time: "12 a.m.",
+        time: "12 p.m.",
         isTimeBooked: false
       },
       {
@@ -327,7 +327,7 @@ class Schedule extends Component {
                   onChange={this.handleInput}
                   value={this.state.newUser.number || ""}
                   name="number"
-                  type="text"
+                  type="tel"
                   placeholder="Your Number"
                 />
               </div>
