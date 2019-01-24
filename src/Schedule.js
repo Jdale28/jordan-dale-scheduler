@@ -6,28 +6,41 @@ const Body = styled.div`
   @import url("https://fonts.googleapis.com/css?family=PT+Sans|Raleway");
   * {
     text-align: center;
-  } 
+  }
   img {
-      width: 400px;
+    margin-top: 2vh;
+    width: 400px;
+    height: auto;
+    @media screen and (max-width: 800px) {
+      width: 350px;
       height: auto;
+    }
   }
   .btn {
-      background-color: rgb(0, 82, 138);
+    background-color: rgb(0, 82, 138);
   }
   .headline {
     margin-top: 3vh;
     font-size: 4rem;
     font-family: "PT Sans";
     color: rgb(0, 82, 138);
+    @media screen and (max-width: 800px) {
+      font-size: 2rem;
+    }
   }
   .tagline {
     font-size: 1.25rem;
     font-family: "Raleway";
+    @media screen and (max-width: 800px) {
+      font-size: 1rem;
+      margin-left: 1vw;
+      margin-right: 1vw;
+    }
   }
   .poll-container {
-    margin-top: 5vh;
+    margin-top: 3vh;
     .count {
-        font-size: 1.5rem;
+      font-size: 1.5rem;
     }
     .poll-button {
       border: 1px solid black;
@@ -41,21 +54,25 @@ const Body = styled.div`
       }
     }
     #love {
-        &:hover {
-            background-color: hotpink;
-        }
+      &:hover {
+        background-color: hotpink;
+      }
     }
     #hate {
-        &:hover {
-            background-color: #9e1316;
-            color: white;
-        }
+      &:hover {
+        background-color: #9e1316;
+        color: white;
+      }
     }
   }
   .poll-headline,
   .time-table-tagline {
     font-family: "PT Sans";
     color: rgb(0, 82, 138);
+    @media screen and (max-width: 800px) {
+      font-size: 1.75rem;
+      margin-top: 2vh;
+    }
   }
 `;
 
@@ -77,13 +94,21 @@ const TimeTable = styled.div`
       background-color: rgb(0, 82, 138);
       color: white;
     }
+    @media screen and (max-width: 800px) {
+      width: 75vw;
+    }
   }
+
   .booked {
     background-color: red;
     &:hover {
       background-color: red;
       color: yellow;
     }
+  }
+  @media screen and (max-width: 800px) {
+    width: 100vw;
+    margin: 0;
   }
 `;
 
@@ -230,18 +255,20 @@ class Schedule extends Component {
     });
     return (
       <Body>
-          <div><img src="https://i.imgur.com/2qWGonz.png" alt=""/></div>
+        <div>
+          <img src="https://i.imgur.com/2qWGonz.png" alt="" />
+        </div>
         <h1 className="headline"> Welcome to Our Offices</h1>
         <h4 className="tagline">
           Please utilize our interactive scheduling software to book an
-          appointment
+          appointment.
         </h4>
         <h4 className="tagline">
-          Please note that booked appointments are highlighted in red
+          Please note that booked appointments are highlighted in red.
         </h4>
         <h4 className="tagline">
-          We apologize... we are very forgetful, if you leave this page, your
-          bookings will refresh
+          We apologize... we are very forgetful. If you leave this page, your
+          bookings will reset.
         </h4>
 
         <TimeTable>
