@@ -15,39 +15,77 @@ const TimeTable = styled.div`
     width: 30vw;
     text-align: center;
   }
+  .booked {
+    background-color: red;
+  }
 `;
 
 class Schedule extends Component {
   state = {
     timeslot: "",
+    users: [],
     newUser: {
       name: "",
-      number: ""
+      number: "",
+      timeslot: ""
     },
     blankUser: {
       name: "",
-      number: ""
+      number: "",
+      timeslot: ""
     },
     availableTimes: [
-      "9 a.m.",
-      "10 a.m.",
-      "11 a.m.",
-      "12 p.m.",
-      "1 p.m.",
-      "2 p.m.",
-      "3 p.m.",
-      "4 p.m.",
-      "5 p.m."
-    ],
-    timebooked: false
+      {
+        time: "9 a.m.",
+        isTimeBooked: false
+      },
+      {
+        time: "10 a.m.",
+        isTimeBooked: false
+      },
+      {
+        time: "11 a.m.",
+        isTimeBooked: false
+      },
+      {
+        time: "12 a.m.",
+        isTimeBooked: false
+      },
+      {
+        time: "1 p.m.",
+        isTimeBooked: false
+      },
+      {
+        time: "2 p.m.",
+        isTimeBooked: false
+      },
+      {
+        time: "3 p.m.",
+        isTimeBooked: false
+      },
+      {
+        time: "4 p.m.",
+        isTimeBooked: false
+      },
+      {
+        time: "5 p.m.",
+        isTimeBooked: false
+      }
+    ]
   };
 
-  activateModal = e => {
-    if (e.target.style.backgroundColor !== "red") {
-      e.target.style.backgroundColor = "red";
+  activateModal = (e, i) => {
       let value = e.target.innerHTML;
-      this.setState({ timeslot: value });
-      this.setState({ timebooked: false });
+      let updatedNewUser = { ...this.state.newUser };
+      if (this.state.availableTimes[i].isTimeBooked === false){
+        updatedNewUser["timeslot"] = value;
+        this.setState({ timeslot: value, newUser: updatedNewUser });
+    } else {
+        let bookedUser = this.state.users.filter(user => {
+            return user.timeslot === value
+        })
+        updatedNewUser = bookedUser[0]
+        this.setState({newUser: updatedNewUser})
     }
   };
 
@@ -57,47 +95,49 @@ class Schedule extends Component {
     this.setState({ newUser: updatedNewUser });
   };
 
-  //   clearInput = e => {
-  //     let elements = document.querySelectorAll(".timeslot");
-  //     for (var i = 0; i < elements.length; i++) {
-  //       elements[i].style.backgroundColor = "white";
-  //     }
-  //     this.setState({ newUser: this.state.blankUser });
-  //   };
-
-  changeColor = () => {
-    if (this.state.timebooked === true) {
-      console.log("let's change to red");
+  handleSubmit = (e) => {
+    let updatedNewUser = { ...this.state.newUser };
+    let allUsers = [...this.state.users];
+    const currentUser = allUsers.filter(user => user.timeslot === updatedNewUser.timeslot)
+    let combinedUsers
+    if (currentUser[0]){
+        const filteredUsers = allUsers.filter(user => user.timeslot !== updatedNewUser.timeslot)
+        combinedUsers = filteredUsers.concat([this.state.newUser])
     } else {
-      console.log("let's do nothing");
+        combinedUsers = [...this.state.users, this.state.newUser];
     }
-  };
-  handleSubmit = e => {
-    this.setState(prevState => ({
-      timebooked: !prevState.timebooked
-    }));
-    this.changeColor();
+
+    let updatedAvailability = [...this.state.availableTimes]
+    const currentTime = updatedAvailability.filter(time => time.time === this.state.timeslot)
+    const newAvailableTimes = updatedAvailability.map(newTime => {
+        if (newTime.time === currentTime[0].time){
+            newTime.isTimeBooked = true
+        }   
+        return newTime
+    })
+    updatedNewUser["name"] = ""
+    updatedNewUser["number"] = ""
+    updatedNewUser["timeslot"] = ""
+    this.setState({ users: combinedUsers, newUser: updatedNewUser, availableTimes: newAvailableTimes });
   };
 
   render() {
     const returnTimes = this.state.availableTimes.map((timeslot, i) => {
       return (
-        
-          <div
-            key={i}
-            data-toggle="modal"
-            data-target="#exampleModalCenter"
-            onClick={this.activateModal}
-            className="timeslot"
-            id={i}
-          >
-            {timeslot}
-          </div>
-
+        <div
+          key={i}
+          data-toggle="modal"
+          data-target="#exampleModalCenter"
+          onClick={e => this.activateModal(e, i)}
+          className={timeslot.isTimeBooked === true ? "timeslot booked" : "timeslot"}
+          id={i}
+        >
+          {timeslot.time}
+        </div>
       );
     });
     return (
-      <div className="board">
+      <div>
         <TimeTable>
           <div>{returnTimes}</div>
         </TimeTable>
@@ -132,7 +172,7 @@ class Schedule extends Component {
               <div className="modal-body">
                 <input
                   onChange={this.handleInput}
-                  value={this.state.newUser.name}
+                  value={this.state.newUser.name || "" }
                   name="name"
                   type="text"
                   placeholder="Your Name"
@@ -141,21 +181,13 @@ class Schedule extends Component {
               <div className="modal-body">
                 <input
                   onChange={this.handleInput}
-                  value={this.state.newUser.number}
+                  value={this.state.newUser.number || ""}
                   name="number"
                   type="text"
                   placeholder="Your Number"
                 />
               </div>
               <div className="modal-footer">
-                {/* <button
-                  onClick={this.clearInput}
-                  type="button"
-                  className="btn btn-primary"
-                  data-dismiss="modal"
-                >
-                  Cancel All Appointments
-                </button> */}
                 <button
                   onClick={this.handleSubmit}
                   type="button"
@@ -169,7 +201,6 @@ class Schedule extends Component {
           </div>
         </div>
         {/* End Modal Code from React-strap */}
-        
       </div>
     );
   }
