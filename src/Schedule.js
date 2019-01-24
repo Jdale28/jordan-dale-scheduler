@@ -197,31 +197,37 @@ class Schedule extends Component {
   handleSubmit = e => {
     let updatedNewUser = { ...this.state.newUser };
     let allUsers = [...this.state.users];
-    // finds currentUser based on matching timeslot
+    // Finds currentUser based on matching timeslot
     const currentUser = allUsers.filter(
       user => user.timeslot === updatedNewUser.timeslot
     );
     let combinedUsers;
-    // if the users do not match, update the users information
+    // If user exists, then update
     if (currentUser[0]) {
+        // Find all who are NOT currentUser via timeslot
       const filteredUsers = allUsers.filter(
         user => user.timeslot !== updatedNewUser.timeslot
       );
+      // Combine non-currentUser with currentUser's input
       combinedUsers = filteredUsers.concat([this.state.newUser]);
     } else {
+        // ELSE create new user
       combinedUsers = [...this.state.users, this.state.newUser];
     }
     let updatedAvailability = [...this.state.availableTimes];
-    // determine whether timeslot has been previously booked
+    // Determine whether timeslot has been previously booked
     const currentTime = updatedAvailability.filter(
       time => time.time === this.state.timeslot
     );
+    // Change currentTime to booked
     const newAvailableTimes = updatedAvailability.map(newTime => {
-      if (newTime.time === currentTime[0].time) {
+      // IF it equals currentTime then update isTimeBooked boolean
+        if (newTime.time === currentTime[0].time) {
         newTime.isTimeBooked = true;
       }
       return newTime;
     });
+    // Reset newUser in state to allow unique inputs on timeslot's without bookings
     updatedNewUser["name"] = "";
     updatedNewUser["number"] = "";
     updatedNewUser["timeslot"] = "";
