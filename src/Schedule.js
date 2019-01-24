@@ -8,6 +8,7 @@ const Body = styled.div`
     text-align: center;
   }
   .headline {
+    margin-top: 3vh;
     font-size: 4rem;
     font-family: "PT Sans";
   }
@@ -17,6 +18,9 @@ const Body = styled.div`
   }
   .poll-container {
     margin-top: 5vh;
+    .count {
+        font-size: 1.5rem;
+    }
     .poll-button {
       border: 1px solid black;
       opacity: 0.5;
