@@ -21,7 +21,7 @@ const Body = styled.div`
   }
   .headline {
     margin-top: 3vh;
-    font-size: 4rem;
+    font-size: 3rem;
     font-family: "PT Sans";
     color: rgb(0, 82, 138);
     @media screen and (max-width: 800px) {
@@ -29,7 +29,7 @@ const Body = styled.div`
     }
   }
   .tagline {
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-family: "Raleway";
     @media screen and (max-width: 800px) {
       font-size: 1rem;
@@ -38,7 +38,7 @@ const Body = styled.div`
     }
   }
   .poll-container {
-    margin-top: 3vh;
+    margin-top: 2vh;
     .count {
       font-size: 1.5rem;
     }
@@ -69,6 +69,7 @@ const Body = styled.div`
   .time-table-tagline {
     font-family: "PT Sans";
     color: rgb(0, 82, 138);
+    font-size: 1.75rem;
     @media screen and (max-width: 800px) {
       font-size: 1.75rem;
       margin-top: 2vh;
@@ -82,7 +83,7 @@ const TimeTable = styled.div`
   flex-direction: column;
   align-items: center;
   width: 50%;
-  margin: 5vh 25vw 0vh 25vw;
+  margin: 3vh 25vw 0vh 25vw;
   .timeslot {
     border: 1px solid black;
     width: 25vw;
@@ -196,10 +197,12 @@ class Schedule extends Component {
   handleSubmit = e => {
     let updatedNewUser = { ...this.state.newUser };
     let allUsers = [...this.state.users];
+    // finds currentUser based on matching timeslot
     const currentUser = allUsers.filter(
       user => user.timeslot === updatedNewUser.timeslot
     );
     let combinedUsers;
+    // if the users do not match, update the users information
     if (currentUser[0]) {
       const filteredUsers = allUsers.filter(
         user => user.timeslot !== updatedNewUser.timeslot
@@ -209,6 +212,7 @@ class Schedule extends Component {
       combinedUsers = [...this.state.users, this.state.newUser];
     }
     let updatedAvailability = [...this.state.availableTimes];
+    // determine whether timeslot has been previously booked
     const currentTime = updatedAvailability.filter(
       time => time.time === this.state.timeslot
     );
