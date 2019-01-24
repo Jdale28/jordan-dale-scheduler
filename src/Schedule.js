@@ -6,15 +6,19 @@ const Body = styled.div`
   @import url("https://fonts.googleapis.com/css?family=PT+Sans|Raleway");
   * {
     text-align: center;
-  }
+  } 
   img {
       width: 400px;
       height: auto;
+  }
+  .btn {
+      background-color: rgb(0, 82, 138);
   }
   .headline {
     margin-top: 3vh;
     font-size: 4rem;
     font-family: "PT Sans";
+    color: rgb(0, 82, 138);
   }
   .tagline {
     font-size: 1.25rem;
@@ -43,14 +47,15 @@ const Body = styled.div`
     }
     #hate {
         &:hover {
-            background-color: black;
-            color: yellow;
+            background-color: #9e1316;
+            color: white;
         }
     }
   }
   .poll-headline,
   .time-table-tagline {
     font-family: "PT Sans";
+    color: rgb(0, 82, 138);
   }
 `;
 
@@ -232,7 +237,7 @@ class Schedule extends Component {
           appointment
         </h4>
         <h4 className="tagline">
-          Please note that booked appointments are in highlighted in red
+          Please note that booked appointments are highlighted in red
         </h4>
         <h4 className="tagline">
           We apologize... we are very forgetful, if you leave this page, your
