@@ -1,9 +1,12 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const Body = styled.div`
   @import url("https://fonts.googleapis.com/css?family=PT+Sans|Raleway");
   * {
     text-align: center;
+  }
+  .modal-title {
+    font-family: "PT Sans";
   }
   input {
     width: 25vw;

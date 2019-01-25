@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Body, TimeTable } from './Styling';
+import { Body, TimeTable } from "./Styling";
+import Modal from "./Modal";
 
 class Schedule extends Component {
   state = {
@@ -151,7 +152,7 @@ class Schedule extends Component {
   };
 
   render() {
-      // Loop from State of Available Times and Produce divs for each one
+    // Loops from State of availableTimes and produce divs for each one
     const returnTimes = this.state.availableTimes.map((timeslot, i) => {
       return (
         <div
@@ -185,74 +186,21 @@ class Schedule extends Component {
           We apologize... we are very forgetful. If you leave this page, your
           bookings will reset.
         </h4>
-
         <TimeTable>
           <h1 className="time-table-tagline">Please Select a Time Below</h1>
           <div>{returnTimes}</div>
         </TimeTable>
-
-        {/* Start of Modal Code */}
-        <div
-          className="modal fade"
-          id="modalCenter"
-          tabIndex="-1"
-          role="dialog"
-          aria-labelledby="modalCenterTitle"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog modal-dialog-centered" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="modalCenterTitle">
-                  Please enter your name and number to confirm your{" "}
-                  {this.state.timeslot} appointment
-                </h5>
-                <button
-                  type="button"
-                  className="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span onClick={this.clearInput} aria-hidden="true">
-                    &times;
-                  </span>
-                </button>
-              </div>
-              <div className="modal-body">
-                <input
-                  onChange={this.handleInput}
-                  value={this.state.newUser.name || ""}
-                  name="name"
-                  type="text"
-                  placeholder="Your Name"
-                />
-              </div>
-              <div className="modal-body">
-                <input
-                  onChange={this.handleInput}
-                  onBlur={this.validatePhone}
-                  value={this.state.newUser.number || ""}
-                  name="number"
-                  type="text"
-                  id="number"
-                  placeholder="Tel# Ex) XXX-XXX-XXXX"
-                />
-              </div>
-              <div className="modal-footer">
-                <button
-                  onClick={this.handleSubmit}
-                  type="button"
-                  className="btn btn-primary"
-                  data-dismiss="modal"
-                  disabled={this.state.invalid === true ? true : false}
-                >
-                  Book Apppointment
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* End Modal Code */}
+        {/* Start of Modal Code - Passed down relevant functions; info*/}
+        <Modal
+          newUser={this.state.newUser}
+          timeslot={this.state.timeslot}
+          invalid={this.state.invalid}
+          updateModalFields={this.updateModalFields}
+          handleInput={this.handleInput}
+          handleSubmit={this.handleSubmit}
+          validatePhone={this.validatePhone}
+        />
+        {/* End Modal Code
     
         {/* Start of Poll Code */}
         <div className="poll-container">
