@@ -10,7 +10,8 @@ const Body = styled.div`
   input {
     width: 25vw;
     @media screen and (max-width: 800px) {
-      width: 50vw;
+      width: 60vw;
+      border: 1px solid black;
     }
   }
   img {
@@ -256,11 +257,13 @@ class Schedule extends Component {
   };
 
   validatePhone = () => {
+    //validates phone number input based on regular expression
     var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
     if (!this.state.newUser.number.match(phoneno)) {
-      alert("Please submit a valid phone number");
+      document.getElementById("number").style.backgroundColor = "red";
       this.setState({ invalid: true });
     } else {
+      document.getElementById("number").style.backgroundColor = "white";
       this.setState({ invalid: false });
     }
   };
@@ -348,6 +351,7 @@ class Schedule extends Component {
                   value={this.state.newUser.number || ""}
                   name="number"
                   type="text"
+                  id="number"
                   placeholder="Tel# Ex) XXX-XXX-XXXX"
                 />
               </div>
