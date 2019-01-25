@@ -201,6 +201,7 @@ class Schedule extends Component {
   };
 
   handleSubmit = e => {
+    this.validatePhone()
     let updatedNewUser = { ...this.state.newUser };
     let allUsers = [...this.state.users];
     // Finds currentUser based on matching timeslot
@@ -251,6 +252,13 @@ class Schedule extends Component {
   hateModals = () => {
     this.props.dispatch({ type: "HATE" });
   };
+
+validatePhone = () => {
+    var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+    if(!this.state.newUser.number.match(phoneno)) {
+        alert("Please submit a valid phone number");
+    }
+  }
 
   render() {
     const returnTimes = this.state.availableTimes.map((timeslot, i) => {
@@ -331,6 +339,7 @@ class Schedule extends Component {
               <div className="modal-body">
                 <input
                   onChange={this.handleInput}
+                  onBlur={this.validatePhone}
                   value={this.state.newUser.number || ""}
                   name="number"
                   type="text"
