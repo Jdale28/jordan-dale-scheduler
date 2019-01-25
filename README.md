@@ -6,9 +6,13 @@ Hosted live at: https://jordandale-coxauto.herokuapp.com/
 ## Technologies Used: 
 *Redux utilized for counter feature for Modal Poll
 
+*Node.js used for running application and npm commands below:
+
 *Styled-divs utilized for styling
 
-*Node.js used for running application and npm commands below:
+*Implemented Media Queries to accomodate iPhoneX or larger
+
+*React-Bootstrap Modal
 
 
 ## Available Scripts
