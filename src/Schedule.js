@@ -168,7 +168,10 @@ class Schedule extends Component {
     return (
       <Body>
         <div>
-          <img src="https://i.imgur.com/2qWGonz.png" alt="Cox Automotive Logo" />
+          <img
+            src="https://i.imgur.com/2qWGonz.png"
+            alt="Cox Automotive Logo"
+          />
         </div>
         <h1 className="headline"> Welcome to Our Offices</h1>
         <h4 className="tagline">
@@ -188,7 +191,9 @@ class Schedule extends Component {
         </TimeTable>
         {/* Start of Modal Code - Passed down relevant functions; info*/}
         <Modal
+          availableTimes={this.state.availableTimes}
           newUser={this.state.newUser}
+          users={this.state.users}
           timeslot={this.state.timeslot}
           invalid={this.state.invalid}
           updateModalFields={this.updateModalFields}
