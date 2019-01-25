@@ -61,12 +61,14 @@ class Schedule extends Component {
     let activeUser = { ...this.state.newUser };
     // IF the time has not been booked, update the timeslot in newUser's information
     if (this.state.availableTimes[i].isTimeBooked === false) {
+      console.log("hit one")
       activeUser["timeslot"] = value;
       this.setState({ timeslot: value, newUser: activeUser });
     }
     // ELSE, because time has been booked, populated the booked user's information in the modal input fields
     else {
       let bookedUser = this.state.users.filter(user => {
+        this.setState({ timeslot: value})
         return user.timeslot === value;
       });
       activeUser = bookedUser[0];

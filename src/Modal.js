@@ -16,7 +16,7 @@ class Modal extends Component {
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title" id="modalCenterTitle">
-                  Please enter your name and number to confirm your selected appointment
+                  Please enter your name and number to confirm your {this.props.timeslot} appointment
                 </h5>
 
                 <button
