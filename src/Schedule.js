@@ -19,39 +19,35 @@ class Schedule extends Component {
     },
     availableTimes: [
       {
-        time: "9 a.m.",
+        time: "9 a.m. - 10 a.m.",
         isTimeBooked: false
       },
       {
-        time: "10 a.m.",
+        time: "10 a.m. - 11 a.m.",
         isTimeBooked: false
       },
       {
-        time: "11 a.m.",
+        time: "11 a.m. - 12 p.m.",
         isTimeBooked: false
       },
       {
-        time: "12 p.m.",
+        time: "12 p.m. - 1 p.m.",
         isTimeBooked: false
       },
       {
-        time: "1 p.m.",
+        time: "1 p.m. - 2 p.m.",
         isTimeBooked: false
       },
       {
-        time: "2 p.m.",
+        time: "2 p.m. - 3 p.m.",
         isTimeBooked: false
       },
       {
-        time: "3 p.m.",
+        time: "3 p.m. - 4 p.m.",
         isTimeBooked: false
       },
       {
-        time: "4 p.m.",
-        isTimeBooked: false
-      },
-      {
-        time: "5 p.m.",
+        time: "4 p.m. - 5 p.m.",
         isTimeBooked: false
       }
     ],
