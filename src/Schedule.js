@@ -8,8 +8,8 @@ const Body = styled.div`
     text-align: center;
   }
   input {
-      width: 25vw;
-      @media screen and (max-width: 800px) {
+    width: 25vw;
+    @media screen and (max-width: 800px) {
       width: 50vw;
     }
   }
@@ -54,7 +54,7 @@ const Body = styled.div`
       border-radius: 25px;
       font-size: 1.25rem;
       padding: 10px;
-      margin: .5vh 1vw 0vh 1vw;
+      margin: 0.5vh 1vw 0vh 1vw;
       &:hover {
         opacity: 1;
       }
@@ -170,7 +170,8 @@ class Schedule extends Component {
         time: "5 p.m.",
         isTimeBooked: false
       }
-    ]
+    ],
+    invalid: false
   };
 
   // When Modal activates, this function runs to determine whether time is available or not, and corresponding actions
@@ -201,48 +202,49 @@ class Schedule extends Component {
   };
 
   handleSubmit = e => {
-    this.validatePhone()
-    let updatedNewUser = { ...this.state.newUser };
-    let allUsers = [...this.state.users];
-    // Finds currentUser based on matching timeslot
-    const currentUser = allUsers.filter(
-      user => user.timeslot === updatedNewUser.timeslot
-    );
-    let combinedUsers;
-    // If user exists, then update
-    if (currentUser[0]) {
-        // Find all who are NOT currentUser via timeslot
-      const filteredUsers = allUsers.filter(
-        user => user.timeslot !== updatedNewUser.timeslot
+    if (this.state.invalid !== true) {
+      let updatedNewUser = { ...this.state.newUser };
+      let allUsers = [...this.state.users];
+      // Finds currentUser based on matching timeslot
+      const currentUser = allUsers.filter(
+        user => user.timeslot === updatedNewUser.timeslot
       );
-      // Combine non-currentUser with currentUser's input
-      combinedUsers = filteredUsers.concat([this.state.newUser]);
-    } else {
+      let combinedUsers;
+      // If user exists, then update
+      if (currentUser[0]) {
+        // Find all who are NOT currentUser via timeslot
+        const filteredUsers = allUsers.filter(
+          user => user.timeslot !== updatedNewUser.timeslot
+        );
+        // Combine non-currentUser with currentUser's input
+        combinedUsers = filteredUsers.concat([this.state.newUser]);
+      } else {
         // ELSE create new user
-      combinedUsers = [...this.state.users, this.state.newUser];
-    }
-    let updatedAvailability = [...this.state.availableTimes];
-    // Determine whether timeslot has been previously booked
-    const currentTime = updatedAvailability.filter(
-      time => time.time === this.state.timeslot
-    );
-    // Change currentTime to booked
-    const newAvailableTimes = updatedAvailability.map(newTime => {
-      // IF it equals currentTime then update isTimeBooked boolean
-        if (newTime.time === currentTime[0].time) {
-        newTime.isTimeBooked = true;
+        combinedUsers = [...this.state.users, this.state.newUser];
       }
-      return newTime;
-    });
-    // Reset newUser in state to allow unique inputs on timeslot's without bookings
-    updatedNewUser["name"] = "";
-    updatedNewUser["number"] = "";
-    updatedNewUser["timeslot"] = "";
-    this.setState({
-      users: combinedUsers,
-      newUser: updatedNewUser,
-      availableTimes: newAvailableTimes
-    });
+      let updatedAvailability = [...this.state.availableTimes];
+      // Determine whether timeslot has been previously booked
+      const currentTime = updatedAvailability.filter(
+        time => time.time === this.state.timeslot
+      );
+      // Change currentTime to booked
+      const newAvailableTimes = updatedAvailability.map(newTime => {
+        // IF it equals currentTime then update isTimeBooked boolean
+        if (newTime.time === currentTime[0].time) {
+          newTime.isTimeBooked = true;
+        }
+        return newTime;
+      });
+      // Reset newUser in state to allow unique inputs on timeslot's without bookings
+      updatedNewUser["name"] = "";
+      updatedNewUser["number"] = "";
+      updatedNewUser["timeslot"] = "";
+      this.setState({
+        users: combinedUsers,
+        newUser: updatedNewUser,
+        availableTimes: newAvailableTimes
+      });
+    }
   };
 
   loveModals = () => {
@@ -253,12 +255,15 @@ class Schedule extends Component {
     this.props.dispatch({ type: "HATE" });
   };
 
-validatePhone = () => {
+  validatePhone = () => {
     var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-    if(!this.state.newUser.number.match(phoneno)) {
-        alert("Please submit a valid phone number");
+    if (!this.state.newUser.number.match(phoneno)) {
+      alert("Please submit a valid phone number");
+      this.setState({ invalid: true });
+    } else {
+      this.setState({ invalid: false });
     }
-  }
+  };
 
   render() {
     const returnTimes = this.state.availableTimes.map((timeslot, i) => {
@@ -352,6 +357,7 @@ validatePhone = () => {
                   type="button"
                   className="btn btn-primary"
                   data-dismiss="modal"
+                  disabled={this.state.invalid === true ? true : false}
                 >
                   Book Apppointment
                 </button>
@@ -360,7 +366,9 @@ validatePhone = () => {
           </div>
         </div>
         {/* End Modal Code */}
-
+        {/* className={
+            timeslot.isTimeBooked === true ? "timeslot booked" : "timeslot"
+          } */}
         {/* Start of Poll Code */}
         <div className="poll-container">
           <h1 className="poll-headline">Poll:</h1>
