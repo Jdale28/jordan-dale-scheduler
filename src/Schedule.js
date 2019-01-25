@@ -172,7 +172,7 @@ class Schedule extends Component {
     return (
       <Body>
         <div>
-          <img src="https://i.imgur.com/2qWGonz.png" alt="" />
+          <img src="https://i.imgur.com/2qWGonz.png" alt="Cox Automotive Logo" />
         </div>
         <h1 className="headline"> Welcome to Our Offices</h1>
         <h4 className="tagline">
