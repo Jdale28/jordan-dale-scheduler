@@ -51,7 +51,8 @@ class Schedule extends Component {
         isTimeBooked: false
       }
     ],
-    invalid: false
+    invalid: false,
+    tester: false
   };
 
   // When Modal activates, this function runs to determine whether time is available or not, and corresponding actions
