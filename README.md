@@ -1,6 +1,6 @@
-## React App created by Jordan Dale for Cox Automotives.
+## React App created by Jordan Dale.
 
-Hosted live at: https://jordandale-coxauto.herokuapp.com/
+Hosted live at: https://jordan-dale-scheduler.herokuapp.com/
 
 
 ## Technologies Used: 
