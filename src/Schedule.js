@@ -171,8 +171,8 @@ class Schedule extends Component {
       <Body>
         <div>
           <img
-            src="https://i.imgur.com/2qWGonz.png"
-            alt="Cox Automotive Logo"
+            src="https://i.imgur.com/cqYUZCk.jpg"
+            alt="Scheduler Icon"
           />
         </div>
         <h1 className="headline"> Welcome to Our Offices</h1>

@@ -17,7 +17,7 @@ export const Body = styled.div`
   }
   img {
     margin-top: 2vh;
-    width: 400px;
+    width: 300px;
     height: auto;
     @media screen and (max-width: 800px) {
       width: 350px;
